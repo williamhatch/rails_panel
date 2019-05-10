@@ -25,6 +25,9 @@ module MetaRequest
         raise
       ensure
         Storage.new(app_request.id).write(app_request.events.to_json) unless app_request.events.empty?
+        @file ||= File.open(File.join(Rails.root, 'log', 'meta_request_sum.log'), 'w')
+        @file.puts(app_request.events.to_json)
+        @file.puts('-----------------------------')
       end
     end
   end

@@ -9,7 +9,7 @@ module MetaRequest
     def write(value)
       FileUtils.mkdir_p dir_path
       File.open(json_file, 'wb') { |file| file.write(value) }
-      maintain_file_pool(10)
+      maintain_file_pool(10000)
     end
 
     def read
